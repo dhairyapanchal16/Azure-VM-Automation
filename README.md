@@ -1,80 +1,177 @@
-# Azure-VM-Automation
+Azure VM Automation (PowerShell)
 
-Azure-VM-Automation/
-│
-├── Create-VM.ps1
-├── Delete-VM.ps1
+Enterprise-grade automation for provisioning and decommissioning Azure Virtual Machine infrastructure using Azure PowerShell (Az Module).
 
-🧠 Scripts Overview
-🚀 1️⃣ Create-VM.ps1
+📌 Overview
 
-This script automatically creates:
+This repository contains PowerShell scripts designed to automate the deployment and removal of a complete Azure Virtual Machine environment.
+
+The project demonstrates Infrastructure as Code (IaC) principles using Azure Resource Manager through PowerShell and aligns with practical skills required for Microsoft AZ-104 certification and real-world cloud operations.
+
+🏗 Architecture
+
+The Create script provisions the following resource hierarchy:
 
 Resource Group
+│
+├── Virtual Network
+│   └── Subnet
+│
+├── Network Security Group (NSG)
+│   └── Inbound Rule: TCP 3389 (RDP)
+│
+├── Public IP Address
+│
+├── Network Interface (NIC)
+│
+└── Windows Virtual Machine
 
-Virtual Network (VNet)
+All resources are logically grouped within a single Resource Group to ensure simplified lifecycle management.
 
-Subnet
+📁 Repository Structure
+Azure-VM-Automation/
+│
+├── Create-VM.ps1      # Infrastructure provisioning script
+├── Delete-VM.ps1      # Infrastructure teardown script
+└── README.md
+🚀 Features
+Automated Provisioning
 
-Network Security Group (NSG)
+Creates Resource Group
 
-Public IP
+Deploys Virtual Network and Subnet
 
-Azure Virtual Machine
+Configures Network Security Group
 
-📌 What It Does
+Opens RDP Port (3389)
 
-Creates all required Azure resources
+Creates Public IP and NIC
 
-Opens port 3389 (RDP) for Windows VM
+Deploys Windows Virtual Machine
 
-Deploys VM in specified region
+Automated Cleanup
 
-Fully automated environment setup
+Deletes entire Resource Group
 
-▶️ How to Run
-.\Create-VM.ps1
-🗑 2️⃣ Delete-VM.ps1
+Removes all associated resources
 
-This script deletes the entire Resource Group.
+Prevents ongoing Azure billing
 
-Since all resources are inside the Resource Group, everything will be removed in one command.
+Operational Benefits
 
-📌 What It Does
+Repeatable deployments
 
-Deletes Resource Group
+Reduced human error
 
-Deletes VM
+Faster environment setup
 
-Deletes VNet, NSG, Public IP
+Clean resource lifecycle control
 
-Prevents unnecessary Azure charges 💰
+🔐 Prerequisites
 
-▶️ How to Run
-.\Delete-VM.ps1
-🔐 Required Azure Login
+Azure Subscription
 
-Before running scripts:
-
-Connect-AzAccount
-⚙️ Technologies Used
-
-☁️ Microsoft Azure
-
-💻 PowerShell 7
+PowerShell 7+
 
 Azure PowerShell Module (Az)
 
-🎯 Learning Outcome
+Install Az Module if not already installed:
 
-This project demonstrates:
+Install-Module Az -Scope CurrentUser -Repository PSGallery -Force
+🔑 Authentication
 
-Infrastructure Automation
+Authenticate before running any script:
 
-Azure Resource Management
+Connect-AzAccount
 
-PowerShell scripting
+If working with multiple subscriptions:
 
-Cloud cost management
+Get-AzSubscription
+Set-AzContext -SubscriptionId "<subscription-id>"
+▶️ Usage
+Provision Infrastructure
+.\Create-VM.ps1
 
-AZ-104 practical skills
+This script will deploy all required Azure resources in the configured region.
+
+Decommission Infrastructure
+.\Delete-VM.ps1
+
+This removes the entire Resource Group and all associated resources.
+
+💰 Cost Management
+
+Azure resources incur charges while running.
+
+Best Practice:
+
+Always delete lab environments after use
+
+Use Resource Group-level deletion for clean teardown
+
+🧠 Technical Concepts Demonstrated
+
+Infrastructure as Code (IaC)
+
+Azure Resource Manager (ARM)
+
+Azure Networking Fundamentals
+
+VM Deployment Automation
+
+Resource Group Lifecycle Management
+
+Cost Optimization Strategies
+
+AZ-104 Practical Implementation
+
+🔄 Future Enhancements
+
+Potential enterprise-grade improvements:
+
+Parameterized deployment
+
+Secure credential handling
+
+Support for Linux VM
+
+Managed Disk customization
+
+Bicep / ARM template conversion
+
+Terraform implementation
+
+CI/CD pipeline integration
+
+Tag-based governance policy
+
+Logging & monitoring integration
+
+🛡 Security Considerations
+
+Avoid hardcoding credentials
+
+Use Azure Key Vault for secrets
+
+Restrict NSG rules in production
+
+Implement RBAC least-privilege access
+
+Enable Azure Monitor diagnostics
+
+📚 Ideal For
+
+AZ-104 Certification Preparation
+
+Cloud Engineers
+
+DevOps Engineers
+
+System Administrators
+
+IT Students building cloud portfolios
+
+👨‍💻 Author
+
+Dhairya Panchal
+Cloud & DevOps Enthusiast
