@@ -1,0 +1,2 @@
+$resourceGroup = "RG-AzureAutomation"
+Remove-AzResourceGroup -Name $resourceGroup -Force
